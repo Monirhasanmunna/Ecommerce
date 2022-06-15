@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BaseController;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 
@@ -14,6 +15,12 @@ Route::get('/cart',[BaseController::class,'cart'])->name('cart');
 Route::get('/product_details',[BaseController::class,'productView'])->name('product_details');
 
 Route::get('/dashboard',[AdminController::class,'dashboard'])->middleware(['auth'])->name('admin.dashboard');
+
+Route::group(['as'=>'admin','prefix'=>'admin','middleware'=>['auth']],function(){
+
+    Route::get('/dashboard',[AdminController::class,'dashboard'])->name('dashboard');
+    
+});
 
 
 

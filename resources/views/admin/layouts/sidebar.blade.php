@@ -25,7 +25,7 @@
         <div class="menu_section active">
           <h3>General</h3>
           <ul class="nav side-menu" style="">
-            <li class="active"><a href="{{route('admin.dashboard')}}"><i class="fa fa-home"></i> Home</a></li>
+            <li class="active"><a href="{{route('admin.dashboard')}}"><i class="fa fa-home"></i> Dashboard</a></li>
           </ul>
         </div>
       </div>
