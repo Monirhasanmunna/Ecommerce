@@ -38,7 +38,8 @@
                 <input type="password" class="form-control"  name="password" placeholder="Password" required="">
               </div>
               <div>
-                <a class="btn bg-secondary text-white submit">Log in</a>
+                
+                <button type="submit" class="btn btn-sm bg-secondary text-white">Log In</button>
                 <a class="reset_pass" href="href="{{ route('password.request') }}">Lost your password?</a>
               </div>
 
