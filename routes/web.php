@@ -22,6 +22,9 @@ Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth']],function(
     Route::get('/categories',[CategoryController::class,'index'])->name('categories.list');
     Route::get('/categories_add',[CategoryController::class,'addNew'])->name('categories.add');
     Route::post('/categories_store',[CategoryController::class,'store'])->name('categories.store');
+    Route::get('/categories/{id}/edit',[CategoryController::class,'edit'])->name('categories.edit');
+    Route::put('/categories/{id}/update',[CategoryController::class,'update'])->name('categories.update');
+    Route::delete('/categories/{id}/delete',[CategoryController::class,'destroy'])->name('categories.destroy');
 });
 
 
