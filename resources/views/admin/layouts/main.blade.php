@@ -8,6 +8,7 @@
 
     <title>Dashboard</title>
 
+    
     <!-- Bootstrap -->
     <link href="{{asset('admin/vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Font Awesome -->
@@ -23,7 +24,7 @@
     <link href="{{asset('admin/vendors/jqvmap/dist/jqvmap.min.css')}}" rel="stylesheet">
     <!-- bootstrap-daterangepicker -->
     <link href="{{asset('admin/vendors/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
-
+    @yield('css')
     <!-- Custom Theme Style -->
     <link href="{{asset('admin/build/css/custom.min.css')}}" rel="stylesheet">
   </head>
@@ -39,12 +40,10 @@
         <!-- /top navigation -->
 
         <!-- page content -->
+        <div class="right_col" role="main" style="min-height: 1683px;">
         @yield('content')
+        </div>
         <!-- /page content -->
-
-        <!-- footer content -->
-       @include('admin.layouts.footer')
-        <!-- /footer content -->
       </div>
     </div>
 
@@ -85,9 +84,9 @@
     <!-- bootstrap-daterangepicker -->
     <script src="{{asset('admin/vendors/moment/min/moment.min.js')}}"></script>
     <script src="{{asset('admin/vendors/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
-
     <!-- Custom Theme Scripts -->
     <script src="{{asset('admin/build/js/custom.min.js')}}"></script>
+    @yield('js')
 	
   
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BaseController;
+use App\Http\Controllers\CategoryController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -14,12 +15,13 @@ Route::get('/contact_us',[BaseController::class,'contact'])->name('contact');
 Route::get('/cart',[BaseController::class,'cart'])->name('cart');
 Route::get('/product_details',[BaseController::class,'productView'])->name('product_details');
 
-Route::get('/dashboard',[AdminController::class,'dashboard'])->middleware(['auth'])->name('admin.dashboard');
-
-Route::group(['as'=>'admin','prefix'=>'admin','middleware'=>['auth']],function(){
+// Admin Routes
+Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth']],function(){
 
     Route::get('/dashboard',[AdminController::class,'dashboard'])->name('dashboard');
-    
+    Route::get('/categories',[CategoryController::class,'index'])->name('categories.list');
+    Route::get('/categories_add',[CategoryController::class,'addNew'])->name('categories.add');
+    Route::post('/categories_store',[CategoryController::class,'store'])->name('categories.store');
 });
 
 

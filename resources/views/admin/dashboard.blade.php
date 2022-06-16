@@ -2,7 +2,6 @@
 @extends('admin.layouts.main')
 
 @section('content')
-<div class="right_col" role="main" style="min-height: 1683px;">
     <!-- top tiles -->
     <div class="row" style="display: inline-block;">
     <div class="tile_count">
@@ -39,5 +38,4 @@
     </div>
   </div>
     <!-- /top tiles -->
-  </div>
 @endsection

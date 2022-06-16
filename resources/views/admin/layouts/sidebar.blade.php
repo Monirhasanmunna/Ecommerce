@@ -26,6 +26,14 @@
           <h3>General</h3>
           <ul class="nav side-menu" style="">
             <li class="active"><a href="{{route('admin.dashboard')}}"><i class="fa fa-home"></i> Dashboard</a></li>
+
+            <li class=""><a><i class="fa fa-edit"></i> Category <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu" style="display: none;">
+                <li><a href="{{route('admin.categories.list')}}">List</a></li>
+                <li><a href="{{route('admin.categories.add')}}">Add New</a></li>
+              </ul>
+            </li>
+
           </ul>
         </div>
       </div>
