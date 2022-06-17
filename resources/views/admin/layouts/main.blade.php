@@ -29,7 +29,7 @@
     <link href="{{asset('admin/build/css/custom.min.css')}}" rel="stylesheet">
   </head>
 
-  <body class="nav-md">
+  <body class="nav-md" style="background: none;">
     <div class="container body">
       <div class="main_container">
         
@@ -40,7 +40,7 @@
         <!-- /top navigation -->
 
         <!-- page content -->
-        <div class="right_col" role="main" style="min-height: 1683px;">
+        <div class="right_col" role="main" style="min-height: 700px;">
         @yield('content')
         </div>
         <!-- /page content -->

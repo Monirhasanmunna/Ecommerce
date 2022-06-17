@@ -34,6 +34,13 @@
               </ul>
             </li>
 
+            <li class=""><a><i class="fa fa-edit"></i>Sub Category <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu" style="display: none;">
+                <li><a href="{{route('admin.subcategories.list')}}">List</a></li>
+                <li><a href="{{route('admin.subcategories.add')}}">Add New</a></li>
+              </ul>
+            </li>
+
           </ul>
         </div>
       </div>
