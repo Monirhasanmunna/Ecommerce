@@ -3,7 +3,9 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController;
+use App\Models\Product;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -37,7 +39,14 @@ Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth']],function(
     Route::get('/sub_categories/{id}/edit',[SubCategoryController::class,'edit'])->name('subcategories.edit');
     Route::put('/sub_categories/{id}/update',[SubCategoryController::class,'update'])->name('subcategories.update');
     Route::delete('/sub_categories/{id}/delete',[SubCategoryController::class,'destroy'])->name('subcategories.destroy');
+    //Sub-Category Route Ends Here
 
+    //Product manegement Route Start Here
+    Route::get('/products',[ProductController::class,'index'])->name('product.list');
+    Route::get('/products/add',[ProductController::class,'addNew'])->name('product.list.add');
+    Route::post('/products/store',[ProductController::class,'store'])->name('product.list.store');
+    Route::get('/products/{id}/details/add',[ProductController::class,'addDetails'])->name('product.list.addDetails');
+    Route::post('/products/{id}/details/store',[ProductController::class,'detailsStore'])->name('product.list.detailsStore');
 
 });
 
