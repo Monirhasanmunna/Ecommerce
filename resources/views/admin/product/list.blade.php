@@ -14,7 +14,7 @@
 <div class="row">
     <div class="x_panel">
         <div class="x_title">
-            <h2>Categories</h2>
+            <h2>Products</h2>
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
@@ -64,7 +64,7 @@
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-fixed-header"
                                                     rowspan="1" colspan="1"
                                                     aria-label="Start date: activate to sort column ascending"
-                                                    style="width: 90px;">Add Details</th>
+                                                    style="width: 40px;">Details</th>
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-fixed-header"
                                                      colspan="1"
                                                     aria-label="Salary: activate to sort column ascending"
@@ -79,10 +79,18 @@
                                                 <td>{{$product->title}}</td>
                                                 <td>{{$product->subcategory->category->name}}</td>
                                                 <td>{{$product->subcategory->name}}</td>
-                                                <td>{{$product->status}}</td>
+                                                <td>
+                                                    @if ($product->status == 1)
+                                                        <span class="badge bg-primary text-white">Published</span>
+                                                    @else
+                                                    
+                                                        <span class="badge bg-info text-white">Unpublished</span>
+                                                    
+                                                    @endif
+                                                </td>
                                                 <td>{{$product->price}}</td>
                                                 <td><a class="btn btn-sm bg-info text-white" href="{{route('admin.product.list.addDetails',[$product->id])}}">Add</a></td>
-                                                <td><span><a style="color: white;" class="btn-sm bg-success" href="{{route('admin.subcategories.edit',[$product->id])}}"><i class="fa fa-bars"></i></a> |
+                                                <td><span><a style="color: white;" class="btn-sm bg-success" href="{{route('admin.product.edit',[$product->id])}}"><i class="fa fa-bars"></i></a> |
                                                 
                                                     <form action="{{route('admin.categories.destroy',[$product->id])}}" method="post" style="display:inline;">
                                                         @method('Delete')

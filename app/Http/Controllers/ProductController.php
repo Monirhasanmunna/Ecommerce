@@ -119,4 +119,59 @@ class ProductController extends Controller
         Toastr::info('Product Details Added Successfully', '', ['success']);
         return redirect()->back();     
     }
+
+
+    public function edit($id)
+    {
+        $categories = Category::all();
+        $product = Product::FindorFail($id);
+        return view('admin.product.edit',compact('product','categories'));
+    }
+
+    public function update(Request $request,$id)
+    {
+        $request->validate([
+
+            'title' => 'required|max:100',
+            'category' => 'required',
+            'price' => 'required',
+            'image' => 'sometimes|max:2048|mimes:jpg,jpeg,png,gif,webp',
+
+        ]);
+
+        $product = Product::FindorFail($id);
+        $slug = Str::slug($request->title);
+        $image = $request->file('image');
+        if(isset($image))
+        {
+            //unique name create
+            $imageName = $slug.'_'.uniqid().'.'.$image->getClientOriginalExtension();
+            //storage Create
+            if(!Storage::disk('public')->exists('product'))
+            {
+               Storage::disk('public')->makeDirectory('product');
+            }
+
+            $postImage = Image::make($image)->resize(783,800)->stream();
+            Storage::disk('public')->put('product/'.$imageName,$postImage);
+        }else{
+            $imageName = $product->image;
+        }
+
+
+        
+        $product->title = $request->title;
+        $product->category_id = $request->category;
+        $product->price = $request->price;
+        $product->image = $imageName;
+        if($request->status == true)
+        {
+            $product->status = true;
+        }else{
+            $product->status = false;
+        }
+        $product->save();
+        Toastr::info('Product Updated Successfully', '', ['success']);
+        return redirect()->back();
+    }
 }
