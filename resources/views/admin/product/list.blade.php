@@ -92,7 +92,7 @@
                                                 <td><a class="btn btn-sm bg-info text-white" href="{{route('admin.product.list.addDetails',[$product->id])}}">Add</a></td>
                                                 <td><span><a style="color: white;" class="btn-sm bg-success" href="{{route('admin.product.edit',[$product->id])}}"><i class="fa fa-bars"></i></a> |
                                                 
-                                                    <form action="{{route('admin.categories.destroy',[$product->id])}}" method="post" style="display:inline;">
+                                                    <form action="{{route('admin.product.destroy',[$product->id])}}" method="post" style="display:inline;">
                                                         @method('Delete')
                                                         @csrf
                                                         <button style="border: none;" class="show-alert-delete-box btn-sm btn-danger" type="submit" type="submit"><i class="fa fa-trash"></i></button>

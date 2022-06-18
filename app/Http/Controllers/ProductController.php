@@ -99,11 +99,16 @@ class ProductController extends Controller
 
                 $name = $slug.'_'.uniqid().'.'.$images->getClientOriginalExtension();
 
-                $path = public_path() . '/uploads';
-                $images->move($path, $name);
+                //storage Create
+            if(!Storage::disk('public')->exists('product'))
+            {
+               Storage::disk('public')->makeDirectory('product');
+            }
                 
+           // $postImage = Image::make($image)->resize(783,800)->stream();
+            Storage::disk('public')->put('product/'.$name,'');
 
-                array_push($imageName, $name);
+            array_push($imageName, $name);
                 
             } 
         }
@@ -152,6 +157,12 @@ class ProductController extends Controller
                Storage::disk('public')->makeDirectory('product');
             }
 
+            //delete old image
+            if(Storage::disk('public')->exists('product/'.$product->image))
+            {
+                Storage::disk('public')->delete('product/'.$product->image);
+            }
+
             $postImage = Image::make($image)->resize(783,800)->stream();
             Storage::disk('public')->put('product/'.$imageName,$postImage);
         }else{
@@ -172,6 +183,21 @@ class ProductController extends Controller
         }
         $product->save();
         Toastr::info('Product Updated Successfully', '', ['success']);
+        return redirect()->back();
+    }
+
+
+    public function destroy($id)
+    {
+        $product = Product::FindorFail($id);
+        //delete old image
+        if(Storage::disk('public')->exists('product/'.$product->image))
+        {
+            Storage::disk('public')->delete('product/'.$product->image);
+        }
+
+        $product->delete();
+        Toastr::info('Product Deleted Successfully', '', ['success']);
         return redirect()->back();
     }
 }
