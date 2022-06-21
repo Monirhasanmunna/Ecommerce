@@ -42,8 +42,9 @@
                                     @foreach ($categories as $category)
                                         <optgroup label="{{$category->name}}">
                                             @foreach ($category->subcategories as $subcategory)
-                                                <option {{$product->category_id == $subcategory->id ? 'selected' : ''}} value="{{$subcategory->id}}">{{$subcategory->name}}</option>
+                                                <option {{$product->sub_category_id == $subcategory->id ? 'selected' : ''}} value="{{$subcategory->id}}">{{$subcategory->name}}</option>
                                             @endforeach
+
                                         </optgroup>
                                     @endforeach
                                 </select>

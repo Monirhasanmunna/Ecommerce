@@ -25,14 +25,6 @@
                             </div>
                         </div>
 
-                        {{-- <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Title<span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6">
-                                <textarea id="summernote" name="editordata"></textarea>
-                            </div>
-                        </div> --}}
-
                         <div class=" item form-group">
                             <label class="col-form-label label-align col-md-3 col-sm-3 ">Select Category</label>
                             <div class="col-md-6 col-sm-6">

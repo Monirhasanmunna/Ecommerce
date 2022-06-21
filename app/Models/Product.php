@@ -11,13 +11,18 @@ class Product extends Model
 
     protected $fillable =['title','price','image'];
 
-    public function SubCategory()
+    public function subCategory()
     {
-        return $this->belongsTo(SubCategory::class,'category_id');
+        return $this->belongsTo(SubCategory::class,'sub_category_id');
     }
 
-    public function ProductDetails()
+    public function productDetails()
     {
-        return $this->belongsTo(ProductDetails::class,'product_id');
+        return $this->hasOne(ProductDetails::class,'product_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class,'category_id');
     }
 }

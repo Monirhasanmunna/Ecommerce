@@ -16,7 +16,7 @@ Route::get('/specialsOffer',[BaseController::class,'specialsOffer'])->name('spec
 Route::get('/delivery',[BaseController::class,'delivery'])->name('delivery');
 Route::get('/contact_us',[BaseController::class,'contact'])->name('contact');
 Route::get('/cart',[BaseController::class,'cart'])->name('cart');
-Route::get('/product_details',[BaseController::class,'productView'])->name('product_details');
+Route::get('/product/{id}/details',[BaseController::class,'productView'])->name('product_details');
 
 // Admin Routes
 Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth']],function(){

@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class SubCategory extends Model
 {
     use HasFactory;
-    protected $fillable = ['id','cat_id','name','status','created_at','updated_at'];
+    protected $fillable = ['id','category_id','name','status','created_at','updated_at'];
 
     public function Category()
     {
-        return $this->belongsTo(Category::class,'cat_id');
+        return $this->belongsTo(Category::class,'category_id');
     }
 
-    public function Products()
+    public function products()
     {
-        return $this->hasMany(Product::class,'category_id');
+        return $this->hasMany(Product::class,'sub_category_id');
     }
 }

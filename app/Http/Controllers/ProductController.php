@@ -56,7 +56,7 @@ class ProductController extends Controller
 
         $product = new Product();
         $product->title = $request->title;
-        $product->category_id = $request->category;
+        $product->sub_category_id = $request->category;
         $product->price = $request->price;
         $product->image = $imageName;
         if($request->status == true)
@@ -170,9 +170,8 @@ class ProductController extends Controller
         }
 
 
-        
         $product->title = $request->title;
-        $product->category_id = $request->category;
+        $product->sub_category_id = $request->category;
         $product->price = $request->price;
         $product->image = $imageName;
         if($request->status == true)

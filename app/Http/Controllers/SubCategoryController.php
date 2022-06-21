@@ -33,7 +33,7 @@ class SubCategoryController extends Controller
 
         $subcategory = new SubCategory();
         $subcategory->name = $request->name;
-        $subcategory->cat_id = $request->category;
+        $subcategory->category_id = $request->category;
 
         if($request->status == true)
         {
@@ -69,7 +69,7 @@ class SubCategoryController extends Controller
         $subcategory = SubCategory::FindorFail($id);
 
         $subcategory->name = $request->name;
-        $subcategory->cat_id = $request->category;
+        $subcategory->category_id = $request->category;
         if($request->status == 1)
         {
             $subcategory->status = 1;

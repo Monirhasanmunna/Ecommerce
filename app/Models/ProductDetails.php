@@ -11,7 +11,7 @@ class ProductDetails extends Model
 
     protected $fillable =['quantity','information','images','color'];
 
-    public function Product()
+    public function product()
     {
         return $this->belongsTo(Product::class,'product_id');
     }
