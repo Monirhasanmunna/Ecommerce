@@ -8,26 +8,46 @@
     </ul>
 	<h3>  SHOPPING CART [ <small>3 Item(s) </small>]<a href="products.html" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>	
 	<hr class="soft">
-	<table class="table table-bordered">
+
+	@guest
+		<table class="table table-bordered">
 		<tbody><tr><th> I AM ALREADY REGISTERED  </th></tr>
 		 <tr> 
 		 <td>
-			<form class="form-horizontal">
+			@if($message = Session::get('message'))
+				<div class="alert alert-info fade in">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					{{$message}}
+				</div>
+			@endif
+
+			@if ($errors->any())
+				<div class="alert alert-danger">
+						@foreach ($errors->all() as $error)
+						<div class="alert alert-block alert-error fade in">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							{{$error}}
+						 </div>
+						@endforeach
+				</div>
+			@endif
+			<form class="form-horizontal" action="{{route('user.login')}}" method="POST">
+				@csrf
 				<div class="control-group">
-				  <label class="control-label" for="inputUsername">Username</label>
+				  <label class="control-label" for="inputUsername">Email</label>
 				  <div class="controls">
-					<input type="text" id="inputUsername" placeholder="Username">
+					<input type="text" id="inputUsername" name="email" placeholder="Email">
 				  </div>
 				</div>
 				<div class="control-group">
 				  <label class="control-label" for="inputPassword1">Password</label>
 				  <div class="controls">
-					<input type="password" id="inputPassword1" placeholder="Password">
+					<input type="password" id="inputPassword1" name="password" placeholder="Password">
 				  </div>
 				</div>
 				<div class="control-group">
 				  <div class="controls">
-					<button type="submit" class="btn">Sign in</button> OR <a href="register.html" class="btn">Register Now!</a>
+					<button type="submit" class="btn">Sign in</button> OR <a href="{{route('user.registration')}}" class="btn">Register Now!</a>
 				  </div>
 				</div>
 				<div class="control-group">
@@ -38,7 +58,8 @@
 			</form>
 		  </td>
 		  </tr>
-	</tbody></table>		
+	</tbody></table>
+	@endguest	
 			
 	<table class="table table-bordered">
               <thead>

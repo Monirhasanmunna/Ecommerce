@@ -62,9 +62,7 @@
 				
 				<hr class="soft">
 				<h4>
-					@if ($product->productDetails->quantity)
 					{{$product->productDetails->quantity}}
-					@endif
 					items in stock</h4>
 				<form class="form-horizontal qtyFrm pull-right">
 				  <div class="control-group">
@@ -151,15 +149,21 @@
 						<h3>New | Available</h3>				
 						<hr class="soft">
 						<h5>{{$relproduct->title}} </h5>
-						<p>
+						<p>	@if ($relproduct->productDetails->information)
 							{{ Str::words(strip_tags($relproduct->productDetails->information),4) }}
+							@endif
+							
 						</p>
 						<a class="btn btn-small pull-right" href="{{route('product_details',[$relproduct->id])}}">View Details</a>
 						<br class="clr">
 					</div>
 					<div class="span3 alignR">
 					<form class="form-horizontal qtyFrm">
-					<h3> Tk.{{$relproduct->price}}</h3>
+					<h3> Tk.
+						@if ($relproduct->price)
+							{{$relproduct->price}}
+						@endif
+						</h3>
 					<label class="checkbox">
 						<input type="checkbox">  Adds product to compair
 					</label><br>
@@ -187,9 +191,9 @@
 						<a href="{{route('product_details',[$relproduct->id])}}"><img src="{{asset('storage/product/'.$relproduct->image)}}" alt=""></a>
 						<div class="caption">
 						  <h5>{{$relproduct->title}}</h5>
-						  <p> 
+						  <p>
 							@if($relproduct->productDetails->information)
-							{{ Str::words(strip_tags($relproduct->productDetails->information),4) }}
+								{{ Str::words(strip_tags($relproduct->productDetails->information),4) }}
 							@endif
 						  </p>
 						  <h4 style="text-align:center"><a class="btn" href="{{route('product_details',[$relproduct->id])}}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">€222.00</a></h4>
@@ -197,8 +201,6 @@
 					  </div>
 					</li>
 					@endforeach
-					
-					
 				  </ul>
 			<hr class="soft">
 			</div>

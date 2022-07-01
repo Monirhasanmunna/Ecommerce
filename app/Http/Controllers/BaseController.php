@@ -37,7 +37,7 @@ class BaseController extends Controller
 
     public function productView($id)
     {
-        $product = Product::FindorFail($id);
+        $product = Product::where('id',$id)->first();
         $productSubCat = $product->sub_category_id;
         $relatedProduct = Product::where('sub_category_id',$productSubCat)->orderBy('created_at','Desc')->get();
         return view('frontend.productView',compact('product','relatedProduct'));

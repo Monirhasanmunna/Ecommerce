@@ -40,28 +40,39 @@
          <li class=""><a href="{{route('delivery')}}">Delivery</a></li>
          <li class=""><a href="{{route('contact')}}">Contact</a></li>
          <li class="">
-         <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
+          @auth
+          <form action="{{route('user.logout')}}" method="post" style="margin-top: 12px;">
+            @csrf
+            <button class="btn btn-large btn-success mt-2" type="submit">Logout</button>
+          </form>
+          @endauth
+          @guest
+              <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
+          @endguest
+         
         <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h3>Login Block</h3>
               </div>
               <div class="modal-body">
-                <form class="form-horizontal loginFrm">
+
+                <form class="form-horizontal loginFrm" action="{{route('user.login')}}" method="POST">
+                  @csrf
                   <div class="control-group">								
-                    <input type="text" id="inputEmail" placeholder="Email">
+                    <input type="email" name="email" id="inputEmail" placeholder="Email">
                   </div>
                   <div class="control-group">
-                    <input type="password" id="inputPassword" placeholder="Password">
+                    <input type="password" name="password" id="inputPassword" placeholder="Password">
                   </div>
                   <div class="control-group">
                     <label class="checkbox">
                     <input type="checkbox"> Remember me
                     </label>
                   </div>
-                </form>		
-                <button type="submit" class="btn btn-success">Sign in</button>
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                  <button type="submit" class="btn btn-success">Sign in</button>
+                  <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                </form>	
               </div>
         </div>
         </li>

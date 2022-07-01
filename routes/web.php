@@ -3,20 +3,28 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FrontedUserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\UserController;
+use App\Models\FrontendUser;
 use App\Models\Product;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/',[BaseController::class,'home'])->name('home');
-Route::get('/specialsOffer',[BaseController::class,'specialsOffer'])->name('specialsOffer');
-Route::get('/delivery',[BaseController::class,'delivery'])->name('delivery');
-Route::get('/contact_us',[BaseController::class,'contact'])->name('contact');
-Route::get('/cart',[BaseController::class,'cart'])->name('cart');
-Route::get('/product/{id}/details',[BaseController::class,'productView'])->name('product_details');
+    Route::get('/',[BaseController::class,'home'])->name('home');
+    Route::get('/specialsOffer',[BaseController::class,'specialsOffer'])->name('specialsOffer');
+    Route::get('/delivery',[BaseController::class,'delivery'])->name('delivery');
+    Route::get('/contact_us',[BaseController::class,'contact'])->name('contact');
+    Route::get('/cart',[BaseController::class,'cart'])->name('cart');
+    Route::get('/product/{id}/details',[BaseController::class,'productView'])->name('product_details');
+
+    Route::get('/registration',[UserController::class,'registration'])->name('user.registration');
+    Route::post('/store',[UserController::class,'store'])->name('user.store');
+    Route::post('/userlogin',[UserController::class,'login'])->name('user.login');
+    Route::post('/userlogout',[UserController::class,'logout'])->name('user.logout');
 
 // Admin Routes
 Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth']],function(){

@@ -41,10 +41,10 @@
 	  <div class="item active">
 	  <ul class="thumbnails">
 		@foreach ($products as $product)
-			<li class="span3">
+		<li class="span3">
 		  <div class="thumbnail">
 		  <i class="tag"></i>
-			<a href="{{route('product_details',[$product->id])}}"><img class="img-fluid" src="{{asset('storage/product/'.$product->image)}}" alt=""></a>
+			<a href="{{route('product_details',[$product->id])}}"><img  src="{{asset('storage/product/'.$product->image)}}" alt=""></a>
 			<div class="caption">
 			  <h5>{{$product->title}}</h5>
 			  <h4><a class="btn" href="{{route('product_details',[$product->id])}}">VIEW</a> <span class="pull-right">Tk.{{$product->price}}</span></h4>
