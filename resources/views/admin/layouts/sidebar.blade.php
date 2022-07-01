@@ -48,6 +48,12 @@
               </ul>
             </li>
 
+            <li class=""><a><i class="fa fa-edit"></i>User Manager<span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu" style="display: none;">
+                <li><a href="{{route('admin.user.list')}}">User List</a></li>
+              </ul>
+            </li>
+
           </ul>
         </div>
       </div>

@@ -7,6 +7,7 @@ use App\Http\Controllers\FrontedUserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserManagerController;
 use App\Models\FrontendUser;
 use App\Models\Product;
 use GuzzleHttp\Middleware;
@@ -27,7 +28,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('/userlogout',[UserController::class,'logout'])->name('user.logout');
 
 // Admin Routes
-Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth']],function(){
+Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth','admin']],function(){
     
     Route::get('/dashboard',[AdminController::class,'dashboard'])->name('dashboard');
 
@@ -58,6 +59,11 @@ Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth']],function(
     Route::get('/products/{id}/edit',[ProductController::class,'edit'])->name('product.edit');
     Route::put('/products/{id}/update',[ProductController::class,'update'])->name('product.update');
     Route::delete('/products/{id}/delete',[ProductController::class,'destroy'])->name('product.destroy');
+
+
+    //User Manager Route Start
+    Route::get('/user_list',[UserManagerController::class,'index'])->name('user.list');
+    Route::delete('/user/{id}/delete',[UserManagerController::class,'delete'])->name('user.delete');
 
 });
 
