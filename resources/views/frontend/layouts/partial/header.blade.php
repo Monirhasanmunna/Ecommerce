@@ -1,7 +1,11 @@
 <div id="header">
-    <div class="container-fluid">
+    <div class="container">
     <div id="welcomeLine" class="row">
-        <div class="span6">Welcome!<strong> User</strong></div>
+        <div class="span6">
+          @if(isset(Auth::user()->user_name))
+          Welcome!<strong> {{Auth::user()->user_name}}
+          @endif
+        </strong></div>
         <div class="span6">
         <div class="pull-right">
             <a href="{{route('cart')}}"><span class="">Fr</span></a>

@@ -23,4 +23,13 @@ class CartController extends Controller
         $product->save();
         return redirect()->back()->with('message','Product Add in Cart');
     }
+
+
+    public function destroy($id)
+    {
+        $cart = Cart::FindorFail($id);
+        $cart->delete();
+        return redirect()->back()->with('message','Product Delete in Cart');
+
+    }
 }

@@ -114,5 +114,6 @@
 	</div>
 </div>
 <span id="themesBtn"></span>
+@yield('js')
 </body>
 </html>

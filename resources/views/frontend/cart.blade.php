@@ -6,21 +6,22 @@
 		<li><a href="index.html">Home</a> <span class="divider">/</span></li>
 		<li class="active"> SHOPPING CART</li>
     </ul>
-	<h3>  SHOPPING CART [ <small>3 Item(s) </small>]<a href="products.html" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>	
+	<h3>  SHOPPING CART [ <small>{{$carts->count()}} Item(s) </small>]<a href="{{route('home')}}" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>	
 	<hr class="soft">
-
-	@guest
-		<table class="table table-bordered">
-		<tbody><tr><th> I AM ALREADY REGISTERED  </th></tr>
-		 <tr> 
-		 <td>
-			@if($message = Session::get('message'))
+	
+	@if($message = Session::get('message'))
 				<div class="alert alert-info fade in">
 					<button type="button" class="close" data-dismiss="alert">×</button>
 					{{$message}}
 				</div>
 			@endif
 
+	@guest
+		<table class="table table-bordered">
+		<tbody><tr><th> I AM ALREADY REGISTERED  </th></tr>
+		 <tr> 
+		 <td>
+			
 			@if ($errors->any())
 				<div class="alert alert-danger">
 						@foreach ($errors->all() as $error)
@@ -60,7 +61,8 @@
 		  </tr>
 	</tbody></table>
 	@endguest	
-			
+	
+	@auth
 	<table class="table table-bordered">
               <thead>
                 <tr>
@@ -81,7 +83,7 @@
                   <td> <img width="60" src="themes/images/products/4.jpg" alt=""></td>
                   <td>{{$cart->products->title}}<br>Color : {{$cart->products->color}}</td>
 				  <td>
-					<div class="input-append"><input class="span1" style="max-width:34px" value="{{$cart->quantity}}" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button"><i class="icon-remove icon-white"></i></button>				</div>
+					<div class="input-append"><input class="span1" style="max-width:34px" value="{{$cart->quantity}}" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><form style="display: inline;" action="{{route('cart.delete',[$cart->id])}}" method="POST">@method('delete') @csrf<button class="btn btn-danger btn_close" data-id='{{$cart->id}}' type="submit"><i class="icon-remove icon-white"></i></button></form></div>
 				  </td>
                   <td>${{$cart->products->price}}</td>
 				  <td>{{$mul}}</td>
@@ -141,9 +143,10 @@
 				</form>				  
 			  </td>
 			  </tr>
-            </tbody></table>		
+            </tbody></table>
+				
 	<a href="products.html" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
 	<a href="login.html" class="btn btn-large pull-right">Next <i class="icon-arrow-right"></i></a>
-	
+	@endauth
 </div>
 @endsection

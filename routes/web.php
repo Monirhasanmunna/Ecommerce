@@ -33,6 +33,7 @@ use Illuminate\Support\Facades\Route;
 
     //Cart store and show routs starts here
     Route::post('/cart/{id}/store',[CartController::class,'store'])->name('cart.store');
+    Route::delete('/cart/{id}/destroy',[CartController::class,'destroy'])->name('cart.delete');
 
 
 
