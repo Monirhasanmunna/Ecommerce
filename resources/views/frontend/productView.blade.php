@@ -7,6 +7,23 @@
     <li><a href="products.html">Products</a> <span class="divider">/</span></li>
     <li class="active">product Details</li>
     </ul>	
+	@if($message = Session::get('message'))
+		<div class="alert alert-info fade in">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			{{$message}}
+		</div>
+	@endif
+
+	@if ($errors->any())
+		<div class="alert alert-danger">
+				@foreach ($errors->all() as $error)
+			<div class="alert alert-block alert-error fade in">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				{{$error}}
+			</div>
+			@endforeach
+		</div>
+	@endif
 	<div class="row">	  
 			<div id="gallery" class="span3">
             <a href="themes/images/products/large/f1.jpg" title="Fujifilm FinePix S2950 Digital Camera">
@@ -46,36 +63,44 @@
 				<h3>{{$product->title}}  </h3>
 				<small>- (14MP, 18x Optical Zoom) 3-inch LCD</small>
 				<hr class="soft">
-				<form class="form-horizontal qtyFrm">
+				<form class="form-horizontal qtyFrm" action="{{route('cart.store',[$product->id])}}" method="POST">
+					@csrf
 				  <div class="control-group">
 					<label class="control-label"><span>Tk.
-						@if ($product->price)
+						@if (isset($product->price))
 						{{$product->price}}
 						@endif
 						</span></label>
 					<div class="controls">
-					<input type="number" class="span1" placeholder="Qty.">
-					  <button type="submit" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
+					<input type="number" class="span1" name="quantity" placeholder="Qty." required>
+					@guest
+					<a href="{{route('cart')}}" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></a>
+					@endguest
+					@auth
+					<button type="submit" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
+					@endauth
 					</div>
 				  </div>
 				</form>
 				
 				<hr class="soft">
 				<h4>
+					@if(isset($product->productDetails->quantity))
 					{{$product->productDetails->quantity}}
+					@endif
 					items in stock</h4>
 				<form class="form-horizontal qtyFrm pull-right">
 				  <div class="control-group">
 					<label class="control-label"><span>Color</span></label>
 					<div class="controls">
-					@if($product->productDetails->color)
+					@if(isset($product->productDetails->color))
 					  {{$product->productDetails->color}}
 					@endif
 					</div>
 				  </div>
 				</form>
 				<hr class="soft clr">
-				@if($product->productDetails->information)
+				@if(isset($product->productDetails->information))
 				<p>{!! $product->productDetails->information !!}</p>
 				@endif
 				<a class="btn btn-small pull-right" href="#detail">More Details</a>
@@ -149,7 +174,7 @@
 						<h3>New | Available</h3>				
 						<hr class="soft">
 						<h5>{{$relproduct->title}} </h5>
-						<p>	@if ($relproduct->productDetails->information)
+						<p>	@if (isset($relproduct->productDetails->information))
 							{{ Str::words(strip_tags($relproduct->productDetails->information),4) }}
 							@endif
 							
@@ -192,7 +217,7 @@
 						<div class="caption">
 						  <h5>{{$relproduct->title}}</h5>
 						  <p>
-							@if($relproduct->productDetails->information)
+							@if(isset($relproduct->productDetails->information))
 								{{ Str::words(strip_tags($relproduct->productDetails->information),4) }}
 							@endif
 						  </p>

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductDetails;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BaseController extends Controller
 {
@@ -31,8 +33,10 @@ class BaseController extends Controller
     }
 
     public function cart()
-    {
-        return view('frontend.cart');
+    {   
+        $auth = Auth::id();
+        $carts = Cart::where('user_id',$auth)->get();
+        return view('frontend.cart',compact('carts'));
     }
 
     public function productView($id)

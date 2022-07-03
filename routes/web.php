@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BaseController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontedUserController;
 use App\Http\Controllers\ProductController;
@@ -14,18 +15,26 @@ use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 
+    //User Management Routs Start here
+    Route::get('/registration',[UserController::class,'registration'])->name('user.registration');
+    Route::post('/store',[UserController::class,'store'])->name('user.store');
+    Route::post('/userlogin',[UserController::class,'login'])->name('user.login');
+    Route::post('/userlogout',[UserController::class,'logout'])->name('user.logout');
+    //User Management Routs Ends here
 
+    //Frontend Page setup Routs Start here
     Route::get('/',[BaseController::class,'home'])->name('home');
     Route::get('/specialsOffer',[BaseController::class,'specialsOffer'])->name('specialsOffer');
     Route::get('/delivery',[BaseController::class,'delivery'])->name('delivery');
     Route::get('/contact_us',[BaseController::class,'contact'])->name('contact');
     Route::get('/cart',[BaseController::class,'cart'])->name('cart');
     Route::get('/product/{id}/details',[BaseController::class,'productView'])->name('product_details');
+    //Frontend Page setup Routs Ends here
 
-    Route::get('/registration',[UserController::class,'registration'])->name('user.registration');
-    Route::post('/store',[UserController::class,'store'])->name('user.store');
-    Route::post('/userlogin',[UserController::class,'login'])->name('user.login');
-    Route::post('/userlogout',[UserController::class,'logout'])->name('user.logout');
+    //Cart store and show routs starts here
+    Route::post('/cart/{id}/store',[CartController::class,'store'])->name('cart.store');
+
+
 
 // Admin Routes
 Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth','admin']],function(){
