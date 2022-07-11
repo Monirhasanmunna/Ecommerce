@@ -63,90 +63,58 @@
 	@endguest	
 	
 	@auth
+	<form action="{{route('product.buy')}}" method="POST">
+	@csrf
 	<table class="table table-bordered">
               <thead>
                 <tr>
                   <th>Product</th>
                   <th>Description</th>
                   <th>Quantity/Update</th>
+				  <th>Select</th>
 				  <th>Price</th>
 				  <th>Total</th>
 				</tr>
               </thead>
+			  
               <tbody>
-				@php $sum = 0; $total = 0; @endphp
-				@foreach ($carts as $cart)
-				@php $sum = $sum + $cart->products->price @endphp
-				@php $mul = $cart->quantity * $cart->products->price @endphp
-				@php $total = $total + $mul @endphp
-                <tr>
-                  <td> <img width="60" src="themes/images/products/4.jpg" alt=""></td>
-                  <td>{{$cart->products->title}}<br>Color : {{$cart->products->color}}</td>
-				  <td>
-					<div class="input-append"><input class="span1" style="max-width:34px" value="{{$cart->quantity}}" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><form style="display: inline;" action="{{route('cart.delete',[$cart->id])}}" method="POST">@method('delete') @csrf<button class="btn btn-danger btn_close" data-id='{{$cart->id}}' type="submit"><i class="icon-remove icon-white"></i></button></form></div>
-				  </td>
-                  <td>${{$cart->products->price}}</td>
-				  <td>{{$mul}}</td>
-                </tr>
-				@endforeach
-				 <tr>
-                  <td colspan="4" style="text-align:right"><strong>TOTAL =</strong></td>
-                  <td class="label label-important" style="display:block"> @if(isset($total))<strong> $ {{$total}} </strong> @endif</td>
-                </tr>
 				
-				</tbody>
-
-            </table>
-		
-		
-            <table class="table table-bordered">
-			<tbody>
-				 <tr>
-                  <td> 
-				<form class="form-horizontal">
-				<div class="control-group">
-				<label class="control-label"><strong> VOUCHERS CODE: </strong> </label>
-				<div class="controls">
-				<input type="text" class="input-medium" placeholder="CODE">
-				<button type="submit" class="btn"> ADD </button>
-				</div>
-				</div>
-				</form>
-				</td>
-                </tr>
-				
+				@if ($carts->count() > 0)
+					@php $sum = 0; $total = 0; @endphp 
+					@foreach ($carts as $cart)
+					{{-- @php $sum = $sum + $cart->products->price @endphp--}}
+					@php $mul = $cart->quantity * $cart->products->price @endphp
+					@php $total = $total + $mul @endphp 
+					<tr>
+					
+					<input style="display: none;" value="{{$cart->product_id}}" name="product_id[]" type="text">
+					  <td> <img width="60" src="{{asset('storage/product/'.$cart->products->image)}}" alt=""></td>
+					  <td>{{$cart->products->title}}<br>Color : {{$cart->products->color}}</td>
+					  <td>
+						<div class="input-append"><input class="span1" name="quantity[]" style="max-width:34px" value="{{$cart->quantity}}" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button>
+							{{-- <form style="display: inline;" action="{{route('cart.delete',[$cart->id])}}" method="POST">
+							@method('delete')
+							@csrf
+								<button class="btn btn-danger btn_close" type="submit"><i class="icon-remove icon-white"></i></button>
+							</form> --}}
+							<a class="btn btn-danger btn_close" href="{{route('cart.delete',[$cart->id])}}"><i class="icon-remove icon-white"></i></a>
+						</div>
+					  </td>
+					  <td><input name="select[]" value="{{$cart->id}}" type="checkbox"></td>
+					  <td>${{$cart->products->price}}</td>
+					  <td>{{$mul}}</td>
+					</tr>
+					@endforeach
+					  {{-- <td colspan="5" style="text-align:right"><strong>TOTAL =</strong></td>
+					  <td class="label label-important" style="display:block"> @if(isset($total))<strong> $ {{$total}} </strong> @endif</td> --}}
+					
+				@else
+					<td colspan="5" style="text-align: center;">No Product Found</td>
+				@endif
 			</tbody>
-			</table>
-			
-			<table class="table table-bordered">
-			 <tbody><tr><th>ESTIMATE YOUR SHIPPING </th></tr>
-			 <tr> 
-			 <td>
-				<form class="form-horizontal">
-				  <div class="control-group">
-					<label class="control-label" for="inputCountry">Country </label>
-					<div class="controls">
-					  <input type="text" id="inputCountry" placeholder="Country">
-					</div>
-				  </div>
-				  <div class="control-group">
-					<label class="control-label" for="inputPost">Post Code/ Zipcode </label>
-					<div class="controls">
-					  <input type="text" id="inputPost" placeholder="Postcode">
-					</div>
-				  </div>
-				  <div class="control-group">
-					<div class="controls">
-					  <button type="submit" class="btn">ESTIMATE </button>
-					</div>
-				  </div>
-				</form>				  
-			  </td>
-			  </tr>
-            </tbody></table>
-				
-	<a href="products.html" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
-	<a href="login.html" class="btn btn-large pull-right">Next <i class="icon-arrow-right"></i></a>
+		</table>
+			<button class="btn btn-primary pull-right" type="submit">BUY</button>
+		</form>
 	@endauth
 </div>
 @endsection

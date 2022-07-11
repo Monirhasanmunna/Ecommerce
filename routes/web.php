@@ -5,6 +5,7 @@ use App\Http\Controllers\BaseController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontedUserController;
+use App\Http\Controllers\ProductBuyController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserController;
@@ -31,9 +32,13 @@ use Illuminate\Support\Facades\Route;
     Route::get('/product/{id}/details',[BaseController::class,'productView'])->name('product_details');
     //Frontend Page setup Routs Ends here
 
-    //Cart store and show routs starts here
+    //Cart store,show and delete routs starts here
     Route::post('/cart/{id}/store',[CartController::class,'store'])->name('cart.store');
-    Route::delete('/cart/{id}/destroy',[CartController::class,'destroy'])->name('cart.delete');
+    Route::get('/cart/{id}/destroy',[CartController::class,'destroy'])->name('cart.delete');
+    //Cart store,show and delete routs ends here
+
+    //Buy routs starts here
+    Route::post('/product/buy',[ProductBuyController::class,'store'])->name('product.buy');
 
 
 
